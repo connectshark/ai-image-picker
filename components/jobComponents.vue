@@ -5,7 +5,7 @@
     <i class='bx bx-loader-circle'></i>
   </div>
   <figure v-else>
-    <img :src="jobs.imageUrl" alt="">
+    <img class=" aspect-square" :src="jobs.imageUrl" alt="">
   </figure>
 </div>
 </template>
