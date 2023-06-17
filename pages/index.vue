@@ -1,6 +1,6 @@
 <template>
 <NuxtLayout>
-<div class=" w-11/12 mx-auto py-20">
+<div class=" w-5/6 mx-auto py-20">
   <h1 class=" text-6xl/loose font-bold">AI<span class=" bg-clip-text text-transparent bg-gradient-to-br from-primary to-accent">Picker</span></h1>
   <p>用最簡單的方式描繪屬於你的想像</p>
 </div>

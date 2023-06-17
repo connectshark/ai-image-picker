@@ -1,12 +1,12 @@
 <template>
 <NuxtLayout>
   <section class="bg-main-black/5">
-    <form @submit.prevent="createNewImage(formData)" class="w-5/6 mx-auto p-10 grid gap-2 md:gap-4 md:grid-cols-2">
-      <div class=" col-span-full">
+    <form @submit.prevent="submitHandler" class="w-11/12 mx-auto py-8 grid gap-2 md:gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div class=" col-span-full xl:col-span-2">
         <label for="prompt">正面提詞</label>
         <textarea required class="w-full resize-none p-4 rounded bg-white" name="prompt" id="prompt" cols="30" rows="3" v-model="formData.prompt" placeholder="提詞"></textarea>
       </div>
-      <div class="col-span-full">
+      <div class="col-span-full xl:col-span-2">
         <label for="negative_prompt">負面提詞</label>
         <textarea class="w-full resize-none p-4 rounded bg-white" name="negative_prompt" id="negative_prompt" cols="30" rows="3" v-model="formData.negative_prompt" placeholder="負面提詞"></textarea>
       </div>
@@ -35,7 +35,7 @@
         </select>
       </div>
       <div class=" text-right col-span-full">
-        <button class="transition-transform hover:-translate-y-1 p-3 rounded-lg bg-primary text-white" type="submit">產生</button>
+        <button :disabled="loading" class="transition-transform hover:-translate-y-1 p-3 disabled:bg-primary/80 rounded-lg bg-primary text-white" type="submit">產生</button>
       </div>
     </form>
   </section>
@@ -43,7 +43,7 @@
     <div class="w-5/6 mx-auto">
       <h2 class="mb-4 text-3xl font-bold">Gallery</h2>
       <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
-        <div v-if="imgLoading || jobLoading" class="w-full rounded-xl aspect-square bg-accent/5 flex items-center justify-center">
+        <div v-if="loading" class="w-full rounded-xl aspect-square bg-accent/5 flex items-center justify-center">
           <i class='bx bx-loader-circle bx-spin bx-md' ></i>
         </div>
         <Card v-for="item in list" :job="item" :key="item.id" :delete="deleteJob"/>
@@ -58,28 +58,18 @@ definePageMeta({
   middleware: ['auth']
 })
 
+const loading = ref(false)
+
 const {
   jobDetail,
-  loading: imgLoading,
   createNewImage
 } = useImages()
 
 const {
   list,
-  loading: jobLoading,
   addJob,
   deleteJob
 } = useJob()
-
-watch(imgLoading, async value => {
-  if (!value && jobDetail.value.job) {
-    await addJob({
-      jobId: jobDetail.value.job,
-      image_url: jobDetail.value.imageUrl
-    })
-  }
-})
-
 
 const models = [
   {
@@ -201,6 +191,13 @@ const formData = reactive({
   model: 'analog-diffusion-1.0.ckpt [9ca13f02]'
 
 })
-
-
+const submitHandler = async () => {
+  loading.value = true
+  await createNewImage(formData)
+  await addJob({
+    jobId: jobDetail.value.job,
+    image_url: jobDetail.value.imageUrl
+  })
+  loading.value = false
+}
 </script>
