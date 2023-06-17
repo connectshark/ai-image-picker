@@ -1,7 +1,7 @@
 <template>
 <Teleport to="body">
 <div class=" fixed inset-0 bg-black/50 grid place-items-center" @click="show = false">
-  <div class="w-4/5 m-auto bg-white overflow-hidden rounded-xl max-w-lg" @click.stop>
+  <div class="w-4/5 max-w-md bg-white overflow-hidden rounded-xl" @click.stop>
     <slot/>
   </div>
 </div>

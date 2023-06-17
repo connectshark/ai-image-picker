@@ -9,7 +9,9 @@
 <script setup>
 const router = useRouter()
 const user = useSupabaseUser()
-setTimeout(() => {
-  router.replace('/ai')
-}, 1000)
+watch(user, value => {
+  if (value.id && value.aud === 'authenticated') {
+    router.replace('/ai')
+  }
+})
 </script>
