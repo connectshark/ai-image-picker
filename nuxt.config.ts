@@ -1,4 +1,9 @@
 export default defineNuxtConfig({
+  nitro: {
+    prerender: {
+      routes: ['/', '/terms', '/disclaimer']
+    }
+  },
   modules: [
     '@nuxtjs/tailwindcss',
     '@nuxtjs/supabase'
@@ -20,12 +25,24 @@ export default defineNuxtConfig({
       ]
     }
   },
+  vite: {
+    vue: {
+      script: {
+        defineModel: true,
+        propsDestructure: true
+      }
+    }
+  },
   runtimeConfig: {
     API_KEY: import.meta.env.API_KEY,
     API_DOMAIN: import.meta.env.API_DOMAIN,
-    API_VERSION: import.meta.env.API_VERSION
+    API_VERSION: import.meta.env.API_VERSION,
+    public: {
+      HOST_NAME: ''
+    }
   },
   tailwindcss: {
     viewer: false,
+    cssPath: '~/assets/main.css'
   }
 })

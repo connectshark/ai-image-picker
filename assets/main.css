@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer {
+  :root {
+    --background: 251 251 254;
+    --primary: 194 56 61;
+    --accent: 42 49 152;
+    --secondary-button: 249 216 218;
+    --main-black: 1 1 4;
+  }
+}

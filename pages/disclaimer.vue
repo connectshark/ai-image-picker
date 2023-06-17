@@ -1,5 +1,7 @@
 <template>
-  <NuxtLayout>
+<NuxtLayout>
+  <article class=" prose mx-auto w-11/12">
     <h1>Disclaimer</h1>
-  </NuxtLayout>
-  </template>
+  </article>
+</NuxtLayout>
+</template>

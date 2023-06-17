@@ -1,9 +1,8 @@
 export default function () {
-  const jobList = useJobs()
   const loading = ref(false)
-  const jobs = ref({})
+  const jobDetail = ref({})
+  
   const createImage = async (config) => {
-    loading.value = true
     const fetch_response = await fetch('/api/img', {
       method: 'POST',
       body: JSON.stringify({
@@ -11,13 +10,10 @@ export default function () {
       })
     })
     const json = await fetch_response.json()
-    jobList.value.push(json.job)
-    localStorage.setItem('jobs', JSON.stringify(jobList.value))
-    loading.value = false
+    return json
   }
 
-  const getJobs = async (jobId) => {
-    loading.value = true
+  const getDetail = async (jobId) => {
     let status = false
     while (!status) {
       const fetch_response = await fetch(`/api/img?jobId=${jobId}`)
@@ -26,18 +22,22 @@ export default function () {
       if (!status) {
         await delay(3000)
       } else {
-        jobs.value = json
+        jobDetail.value = json
       }
     }
+  }
 
+  const createNewImage = async (config) => {
+    loading.value = true
+    const json = await createImage(config)
+    await getDetail(json.job)
     loading.value = false
   }
 
   return {
-    createImage,
+    createNewImage,
     loading,
-    getJobs,
-    jobs
+    jobDetail
   }
 }
 

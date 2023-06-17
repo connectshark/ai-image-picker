@@ -1,44 +1,56 @@
 <template>
-  <NuxtLayout>
-    <div class=" w-11/12 mx-auto bg-slate-300 p-10 grid grid-cols-2 gap-4">
-      <JobComponents v-for="job in jobs" :jobId="job"/>
-    </div>
-    <form @submit.prevent="submitHandler" class=" w-11/12 mx-auto bg-slate-300 p-10 flex flex-col gap-8">
-      <div>
+<NuxtLayout>
+  <section class="bg-main-black/5">
+    <form @submit.prevent="createNewImage(formData)" class="w-5/6 mx-auto p-10 grid gap-2 md:gap-4 md:grid-cols-2">
+      <div class=" col-span-full">
         <label for="prompt">正面提詞</label>
-        <input required class="w-full p-4 rounded bg-white" type="text" name="prompt" id="prompt" v-model="formData.prompt" placeholder="提詞">
+        <textarea required class="w-full resize-none p-4 rounded bg-white" name="prompt" id="prompt" cols="30" rows="3" v-model="formData.prompt" placeholder="提詞"></textarea>
       </div>
-      <div>
+      <div class="col-span-full">
         <label for="negative_prompt">負面提詞</label>
-        <input class="w-full p-4 rounded bg-white" type="text" name="negative_prompt" id="negative_prompt" v-model="formData.negative_prompt" placeholder="負面提詞">
+        <textarea class="w-full resize-none p-4 rounded bg-white" name="negative_prompt" id="negative_prompt" cols="30" rows="3" v-model="formData.negative_prompt" placeholder="負面提詞"></textarea>
       </div>
       <div>
         <label for="model">模型</label>
-        <select class="w-full p-4 rounded bg-white" name="model" id="model" v-model="formData.model">
+        <select class="w-full p-2 rounded bg-white" name="model" id="model" v-model="formData.model">
           <option v-for="model in models" :value="model.id">{{ model.name }}</option>
         </select>
       </div>
       <div>
         <label for="steps">繪圖步數</label>
-        <select class="w-full p-4 rounded bg-white" name="steps" id="steps" v-model.number="formData.steps">
+        <select class="w-full p-2 rounded bg-white" name="steps" id="steps" v-model.number="formData.steps">
           <option v-for="item in 30" :value="item">{{ item }}</option>
         </select>
       </div>
       <div>
         <label for="cfg_scale">CFG Scale</label>
-        <input class="w-full p-4 rounded bg-white" type="tel" name="cfg_scale" id="cfg_scale" v-model.number="formData.cfg_scale">
-      </div>
-      <div>
-        <label for="sampler">取樣器</label>
-        <select class="w-full p-4 rounded bg-white" name="steps" v-model.number="formData.sampler">
-          <option v-for="sampler in samplers" :value="sampler">{{ sampler }}</option>
+        <select class="w-full p-2 rounded bg-white" name="cfg_scale" id="cfg_scale" v-model.number="formData.cfg_scale">
+          <option v-for="item in 20" :value="item">{{ item }}</option>
         </select>
       </div>
       <div>
-        <button class=" p-4 rounded bg-white" type="submit">產生</button>
+        <label for="sampler">取樣器</label>
+        <select class="w-full p-2 rounded bg-white" name="sampler" id="sampler" v-model.number="formData.sampler">
+          <option v-for="sampler in samplers" :value="sampler">{{ sampler }}</option>
+        </select>
+      </div>
+      <div class=" text-right col-span-full">
+        <button class="transition-transform hover:-translate-y-1 p-3 rounded-lg bg-primary text-white" type="submit">產生</button>
       </div>
     </form>
-  </NuxtLayout>
+  </section>
+  <section class="py-20">
+    <div class="w-5/6 mx-auto">
+      <h2 class="mb-4 text-3xl font-bold">Gallery</h2>
+      <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
+        <div v-if="imgLoading || jobLoading" class="w-full rounded-xl aspect-square bg-accent/5 flex items-center justify-center">
+          <i class='bx bx-loader-circle bx-spin bx-md' ></i>
+        </div>
+        <Card v-for="item in list" :job="item" :key="item.id" :delete="deleteJob"/>
+      </div>
+    </div>
+  </section>
+</NuxtLayout>
 </template>
 
 <script setup>
@@ -47,11 +59,27 @@ definePageMeta({
 })
 
 const {
-  loading,
-  createImage
+  jobDetail,
+  loading: imgLoading,
+  createNewImage
 } = useImages()
 
-const jobs = useJobs()
+const {
+  list,
+  loading: jobLoading,
+  addJob,
+  deleteJob
+} = useJob()
+
+watch(imgLoading, async value => {
+  if (!value && jobDetail.value.job) {
+    await addJob({
+      jobId: jobDetail.value.job,
+      image_url: jobDetail.value.imageUrl
+    })
+  }
+})
+
 
 const models = [
   {
@@ -173,8 +201,6 @@ const formData = reactive({
   model: 'analog-diffusion-1.0.ckpt [9ca13f02]'
 
 })
-const submitHandler = async () => {
-  await createImage(formData)
-}
+
 
 </script>

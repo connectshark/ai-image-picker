@@ -8,8 +8,8 @@
     <nav>
       <ul>
         <li>
-          <button v-if="isLogin" @click="logout" type="button">登出</button>
-          <NuxtLink v-else class=" hover:underline" to="/login">登入</NuxtLink>
+          <button v-if="isLogin" class="hover:underline" @click="logout" type="button">登出</button>
+          <NuxtLink v-else class="hover:underline" to="/login">登入</NuxtLink>
         </li>
       </ul>
     </nav>
@@ -18,7 +18,7 @@
   <main>
     <slot></slot>
   </main>
-  <footer class=" py-10">
+  <footer class=" py-10 bg-secondary-button/40">
     <div class="w-5/6 mx-auto grid gap-10">
       <div>
         <p>
@@ -45,9 +45,11 @@
 const user = useSupabaseUser()
 const client = useSupabaseAuthClient()
 const isLogin = ref(user.value?.id !== undefined)
+const router = useRouter()
 
 const logout = async () => {
   await client.auth.signOut()
   isLogin.value = false
+  router.push('/')
 }
 </script>

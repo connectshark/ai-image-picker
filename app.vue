@@ -1,5 +1,5 @@
 <template>
-<div class=" font-ubuntu">
+<div class=" font-ubuntu bg-background text-main-black">
   <NuxtPage />
 </div>
 </template>

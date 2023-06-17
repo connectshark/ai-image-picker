@@ -2,7 +2,6 @@
 <NuxtLayout name="full">
 <div class=" bg-white/80 p-8 rounded-xl text-center">
   <h1>讀取<i class='bx bx-loader-circle bx-spin' ></i></h1>
-  <div>{{ user.id }}</div>
 </div>
 </NuxtLayout>
 </template>

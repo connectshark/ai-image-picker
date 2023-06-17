@@ -21,7 +21,7 @@ const login = async (provider) => {
   const { error } = await client.auth.signInWithOAuth({
     provider,
     options: {
-      redirectTo: 'http://localhost:3000/callback'
+      redirectTo: location.origin + '/callback'
     }
   })
   if (error) {
