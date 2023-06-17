@@ -8,7 +8,7 @@
     <nav>
       <ul>
         <li>
-          <button v-if="isLogin" class="hover:underline" @click="logout" type="button">登出</button>
+          <NuxtLink v-if="isLogin" to="/account"><i class='bx bx-user bx-sm'></i></NuxtLink>
           <NuxtLink v-else class="hover:underline" to="/login">登入</NuxtLink>
         </li>
       </ul>
@@ -43,13 +43,6 @@
 
 <script setup>
 const user = useSupabaseUser()
-const client = useSupabaseAuthClient()
 const isLogin = ref(user.value?.id !== undefined)
-const router = useRouter()
 
-const logout = async () => {
-  await client.auth.signOut()
-  isLogin.value = false
-  router.push('/')
-}
 </script>
