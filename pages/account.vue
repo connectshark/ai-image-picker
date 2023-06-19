@@ -2,7 +2,15 @@
 <NuxtLayout>
   <div class=" w-5/6 mx-auto">
     <h1 class=" font-bold text-2xl/loose">帳號設定</h1>
-    <div class="py-20">
+    <div class="mb-10">
+      <h2 class="mb-4 font-bold text-xl/loose">ID</h2>
+      <p class="text-xs">{{ profile.id }}</p>
+    </div>
+    <div class="mb-10">
+      <h2 class="mb-4 font-bold text-xl/loose">Email</h2>
+      <p>{{ profile.email }}</p>
+    </div>
+    <div>
       <h2 class="mb-4 font-bold text-xl/loose">目前方案</h2>
       <p>基本會員</p>
     </div>
@@ -17,7 +25,10 @@
 definePageMeta({
   middleware: ['auth']
 })
-
+const {
+  profile,
+  loading
+} = useProfile()
 const client = useSupabaseAuthClient()
 const router = useRouter()
 

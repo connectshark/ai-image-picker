@@ -37,6 +37,7 @@ export default defineNuxtConfig({
     API_KEY: import.meta.env.API_KEY,
     API_DOMAIN: import.meta.env.API_DOMAIN,
     API_VERSION: import.meta.env.API_VERSION,
+    KOFI_TOKEN: import.meta.env.KOFI_TOKEN,
     public: {
       HOST_NAME: ''
     }

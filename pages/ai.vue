@@ -1,46 +1,59 @@
 <template>
 <NuxtLayout>
   <section class="bg-main-black/5">
-    <form @submit.prevent="submitHandler" class="w-11/12 mx-auto py-8 grid gap-2 md:gap-4 md:grid-cols-2 xl:grid-cols-4">
-      <div class=" col-span-full xl:col-span-2">
+    <form @submit.prevent="submitHandler" class="w-5/6 mx-auto py-8 grid gap-2 md:gap-4 md:grid-cols-2 xl:grid-cols-4">
+      <div class=" col-span-full" :class="{ 'xl:col-span-2': collapse }">
         <label for="prompt">正面提詞</label>
-        <textarea required class="w-full resize-none p-4 rounded bg-white" name="prompt" id="prompt" cols="30" rows="3" v-model="formData.prompt" placeholder="提詞"></textarea>
+        <textarea required class="w-full resize-none p-4 rounded bg-white" name="prompt" id="prompt" cols="30" rows="2" v-model="formData.prompt" placeholder="提詞"></textarea>
       </div>
-      <div class="col-span-full xl:col-span-2">
+      <div class="col-span-full xl:col-span-2" v-show="collapse">
         <label for="negative_prompt">負面提詞</label>
-        <textarea class="w-full resize-none p-4 rounded bg-white" name="negative_prompt" id="negative_prompt" cols="30" rows="3" v-model="formData.negative_prompt" placeholder="負面提詞"></textarea>
+        <textarea class="w-full resize-none p-4 rounded bg-white" name="negative_prompt" id="negative_prompt" cols="30" rows="2" v-model="formData.negative_prompt" placeholder="負面提詞"></textarea>
       </div>
-      <div>
+      <div v-show="collapse">
         <label for="model">模型</label>
         <select class="w-full p-2 rounded bg-white" name="model" id="model" v-model="formData.model">
           <option v-for="model in models" :value="model.id">{{ model.name }}</option>
         </select>
       </div>
-      <div>
+      <div v-show="collapse">
         <label for="steps">繪圖步數</label>
         <select class="w-full p-2 rounded bg-white" name="steps" id="steps" v-model.number="formData.steps">
           <option v-for="item in 30" :value="item">{{ item }}</option>
         </select>
       </div>
-      <div>
+      <div v-show="collapse">
         <label for="cfg_scale">CFG Scale</label>
         <select class="w-full p-2 rounded bg-white" name="cfg_scale" id="cfg_scale" v-model.number="formData.cfg_scale">
           <option v-for="item in 20" :value="item">{{ item }}</option>
         </select>
       </div>
-      <div>
+      <div v-show="collapse">
         <label for="sampler">取樣器</label>
         <select class="w-full p-2 rounded bg-white" name="sampler" id="sampler" v-model.number="formData.sampler">
           <option v-for="sampler in samplers" :value="sampler">{{ sampler }}</option>
         </select>
       </div>
-      <div class=" text-right col-span-full">
+      <div class=" text-right col-span-full space-x-4">
+        <button class="transition-transform hover:-translate-y-1 p-3 disabled:bg-secondary-button/80 rounded-lg bg-secondary-button text-white" type="button" @click="collapse = !collapse"><i class='bx bx-cog'></i></button>
         <button :disabled="loading" class="transition-transform hover:-translate-y-1 p-3 disabled:bg-primary/80 rounded-lg bg-primary text-white" type="submit">產生</button>
       </div>
     </form>
   </section>
   <section class="py-20">
     <div class="w-5/6 mx-auto">
+      <div class="mb-4  flex items-center">
+        <h2 class="text-3xl font-bold mr-4">DEMO</h2>
+        <button type="button" @click="needDemo = !needDemo"><i class='bx bxs-chevron-down bx-sm' :class="{ 'bx-rotate-180': needDemo }"></i></button>
+      </div>
+      <ul class=" grid grid-cols-3 gap-2" v-show="needDemo">
+        <li v-for="demo in demoPrompts">
+          <div class="bg-center overflow-hidden bg-cover aspect-square rounded-xl mb-1" :style="`background-image: url(${demo.img});`"></div>
+          <div>
+            <button @click="useThisTemplate(demo)" class="transition-transform hover:-translate-y-1 p-3 disabled:bg-primary/80 rounded-lg bg-primary text-white w-full" type="submit">Try</button>
+          </div>
+        </li>
+      </ul>
       <h2 class="mb-4 text-3xl font-bold">Gallery</h2>
       <div class="grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6">
         <div v-if="loading" class="w-full rounded-xl aspect-square bg-accent/5 flex items-center justify-center">
@@ -57,8 +70,39 @@
 definePageMeta({
   middleware: ['auth']
 })
-
+const collapse = ref(false)
+const needDemo = ref(false)
 const loading = ref(false)
+
+const demoPrompts = [
+  {
+    prompt: '1girl, brown hair, green eyes, colorful, autumn, cumulonimbus clouds',
+    negative_prompt: '',
+    steps: 30,
+    cfg_scale: 8,
+    sampler: 'Euler',
+    model: 'anythingv3_0-pruned.ckpt [2700c435]',
+    img: 'https://hackmd.io/_uploads/H11EwFawh.png'
+  },
+  {
+    prompt: 'tiny isometric scientific lab, little scientist, smooth lighting, 100mm lens',
+    negative_prompt: '',
+    steps: 30,
+    cfg_scale: 10,
+    sampler: 'Euler',
+    model: 'sdv1_4.ckpt [7460a6fa]',
+    img: 'https://hackmd.io/_uploads/SkSK6F6wh.png'
+  },
+  {
+    prompt: 'kawaii low poly beluga whale, 3d isometric render, blue background, unity engine, ambient occlusion',
+    negative_prompt: '',
+    steps: 30,
+    cfg_scale: 10,
+    sampler: 'Euler',
+    model: 'sdv1_4.ckpt [7460a6fa]',
+    img: 'https://hackmd.io/_uploads/SkeT6KpD3.png'
+  }
+]
 
 const {
   jobDetail,
@@ -182,18 +226,23 @@ const samplers = [
   'DDIM'
 ]
 
-const formData = reactive({
+const formData = ref({
   prompt: '',
   negative_prompt: '',
   steps: 25,
   cfg_scale: 7,
   sampler: 'DPM++ 2M Karras',
   model: 'analog-diffusion-1.0.ckpt [9ca13f02]'
-
 })
+
+const useThisTemplate = async (template) => {
+  formData.value = { ...template }
+  await submitHandler()
+}
+
 const submitHandler = async () => {
   loading.value = true
-  await createNewImage(formData)
+  await createNewImage(formData.value)
   await addJob({
     jobId: jobDetail.value.job,
     image_url: jobDetail.value.imageUrl
