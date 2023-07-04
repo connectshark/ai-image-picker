@@ -4,11 +4,13 @@
     <h1 class=" font-bold text-2xl/loose">帳號設定</h1>
     <div class="mb-10">
       <h2 class="mb-4 font-bold text-xl/loose">ID</h2>
-      <p class="text-xs">{{ profile.id }}</p>
+      <p v-if="loading"><i class='bx bx-loader-circle bx-spin bx-sm' ></i></p>
+      <p v-else class="text-xs">{{ profile.id }}</p>
     </div>
     <div class="mb-10">
       <h2 class="mb-4 font-bold text-xl/loose">Email</h2>
-      <p>{{ profile.email }}</p>
+      <p v-if="loading"><i class='bx bx-loader-circle bx-spin bx-sm' ></i></p>
+      <p v-else>{{ profile.email }}</p>
     </div>
     <div>
       <h2 class="mb-4 font-bold text-xl/loose">目前方案</h2>

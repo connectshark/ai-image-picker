@@ -1,63 +1,22 @@
-# Nuxt 3 Minimal Starter
+# AI-image-picker
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+AI<span style="color: transparent;background-clip: text;-webkit-background-clip: text;background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">Picker</span> - 用最簡單的方式描繪屬於你的想像
 
-## Setup
+## 目錄
+- [總攬](#總攬)
+  - [截圖](#截圖)
+  - [連結](#連結)
+- [作者](#作者)
+## 總攬
+### 截圖
+![](/readme/cover.png)
 
-Make sure to install the dependencies:
+### 連結
 
-```bash
-# npm
-npm install
+- [Repository](https://github.com/connectshark/ai-image-picker)
+- [Live Demo](https://ai-image-generator-wheat.vercel.app/)
 
-# pnpm
-pnpm install
+## 作者
 
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
-yarn build
-```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- [Github](https://github.com/connectshark)
+- [Personal Website](https://nosegates.com/)

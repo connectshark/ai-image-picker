@@ -5,8 +5,10 @@ export default function () {
   const profile = ref({})
 
   const getProfile = async () => {
+    loading.value = true
     const { data } = await client.from('profiles').select('id, email').eq('id', user.value.id).single()
     profile.value = data
+    loading.value = false
   }
 
   getProfile()
