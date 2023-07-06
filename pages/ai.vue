@@ -46,7 +46,7 @@
         <h2 class="text-3xl font-bold mr-4">DEMO</h2>
         <button type="button" @click="needDemo = !needDemo"><i class='bx bxs-chevron-down bx-sm' :class="{ 'bx-rotate-180': needDemo }"></i></button>
       </div>
-      <ul class=" grid grid-cols-3 gap-2" v-show="needDemo">
+      <ul class=" grid grid-cols-2 gap-2 md:grid-cols-3 lg:grid-cols-6 mb-8" v-show="needDemo">
         <li v-for="demo in demoPrompts">
           <div class="bg-center overflow-hidden bg-cover aspect-square rounded-xl mb-1" :style="`background-image: url(${demo.img});`"></div>
           <div>

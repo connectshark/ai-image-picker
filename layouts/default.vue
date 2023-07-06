@@ -2,8 +2,8 @@
 <header>
   <div class=" w-5/6 mx-auto py-6 flex items-center justify-between">
     <NuxtLink to="/">
-      <img class=" inline-block w-8 mr-2" src="../assets/svg/logo.svg" alt="logo">
-      <span class=" font-bold inline-block">AIPicker</span>
+      <img class=" inline-block w-10 align-middle mr-2" src="../assets/svg/logo.svg" alt="logo">
+      <span class=" font-bold inline-block align-middle">{{ config.site.name }}</span>
     </NuxtLink>
     <nav>
       <ul>
@@ -22,19 +22,19 @@
     <div class="w-5/6 mx-auto grid gap-10">
       <div>
         <p>
-          <NuxtLink to="/">2023<i class='bx bx-copyright'></i>AIPicker</NuxtLink>
+          <NuxtLink to="/">2023<i class='bx bx-copyright'></i>{{ config.site.name }}</NuxtLink>
         </p>
       </div>
-      <div>
+      <div class=" space-x-4">
         <NuxtLink class=" hover:underline" to="/terms">使用者條款</NuxtLink>
         <NuxtLink class=" hover:underline" to="/disclaimer">免責聲明</NuxtLink>
       </div>
-      <div>
+      <div class=" space-x-4">
         <a href="https://www.instagram.com/nose_gates/">
           <i class='bx bxl-instagram bx-sm'></i>
         </a>
-        <a href="javascript:;">
-          <i class='bx bxl-facebook bx-sm'></i>
+        <a href="https://github.com/connectshark/ai-image-picker" target="_blank">
+          <i class='bx bxl-github bx-sm'></i>
         </a>
       </div>
     </div>
@@ -44,5 +44,6 @@
 <script setup>
 const user = useSupabaseUser()
 const isLogin = ref(user.value?.id !== undefined)
+const config = useAppConfig()
 
 </script>

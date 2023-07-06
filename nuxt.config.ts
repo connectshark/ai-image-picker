@@ -4,7 +4,11 @@ export default defineNuxtConfig({
       routes: ['/', '/terms', '/disclaimer']
     }
   },
+  content: {
+    defaultLocale: 'zh-TW'
+  },
   modules: [
+    '@nuxt/content',
     '@nuxtjs/tailwindcss',
     '@vueuse/nuxt',
     '@nuxtjs/supabase'
