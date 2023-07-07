@@ -1,22 +1,41 @@
-# AI-image-picker
-
-AI<span style="color: transparent;background-clip: text;-webkit-background-clip: text;background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);">Picker</span> - 用最簡單的方式描繪屬於你的想像
-
-## 目錄
-- [總攬](#總攬)
-  - [截圖](#截圖)
-  - [連結](#連結)
-- [作者](#作者)
-## 總攬
-### 截圖
 ![](/readme/cover.png)
+# AI-image-picker
+![GitHub last commit (by committer)](https://img.shields.io/github/last-commit/connectshark/ai-image-picker)
 
-### 連結
+[TW](/readme/tw.md)
+
+Describe your imagination in the simplest way possible
+
+## Table of contents
+- [Overview](#overview)
+  - [Introduction](#introduction)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [Process](#process)
+  - [Skills](#skills)
+- [Author](#author)
+## Overview
+### introduction
+This website serves as an innovative AI-driven graphical platform that enables users to swiftly register and commence their utilization through their Google accounts.
+
+By simply inputting a selection of prompts, the AI will autonomously generate suitable images based on the provided content, eliminating the need for any drawing skills or software.
+
+### Screenshot
+![screenshot](/readme/screenshot.png)
+
+### Links
 
 - [Repository](https://github.com/connectshark/ai-image-picker)
 - [Live Demo](https://ai-image-generator-wheat.vercel.app/)
+## Process
 
-## 作者
+### Skills
+- Nuxt
+- Supabase
+- Tailwind CSS
+- Vueuse
+
+## Author
 
 - [Github](https://github.com/connectshark)
 - [Personal Website](https://nosegates.com/)

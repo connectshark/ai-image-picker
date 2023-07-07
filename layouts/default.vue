@@ -2,8 +2,7 @@
 <header>
   <div class=" w-5/6 mx-auto py-6 flex items-center justify-between">
     <NuxtLink to="/">
-      <img class=" inline-block w-10 align-middle mr-2" src="../assets/svg/logo.svg" alt="logo">
-      <span class=" font-bold inline-block align-middle">{{ config.site.name }}</span>
+      <img class="w-10" src="../assets/svg/logo.svg" alt="logo">
     </NuxtLink>
     <nav>
       <ul>
