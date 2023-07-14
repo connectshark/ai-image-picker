@@ -19,6 +19,7 @@
     "nuxt": "^3.6.2"
   },
   "dependencies": {
-    "@vueuse/nuxt": "^10.2.1"
+    "@vueuse/nuxt": "^10.2.1",
+    "prodia-ai": "^0.3.0"
   }
 }

@@ -7,7 +7,7 @@
     <nav>
       <ul>
         <li>
-          <NuxtLink v-if="isLogin" to="/account"><i class='bx bx-user bx-sm'></i></NuxtLink>
+          <NuxtLink v-if="user.id" to="/account"><i class='bx bx-user bx-sm'></i></NuxtLink>
           <NuxtLink v-else class="hover:underline" to="/login">登入</NuxtLink>
         </li>
       </ul>
@@ -41,8 +41,6 @@
 </template>
 
 <script setup>
-const user = useSupabaseUser()
-const isLogin = ref(user.value?.id !== undefined)
+const user = useUser()
 const config = useAppConfig()
-
 </script>

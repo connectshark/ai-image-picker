@@ -2,7 +2,7 @@
 <NuxtLayout name="full">
 <div class=" bg-white/80 p-8 rounded-xl text-center">
   <NuxtLink to="/" class=" w-10 inline-block">
-    <img class=" aspect-square" src="../assets/img/logo.png" alt="logo">
+    <img class=" aspect-square" src="../assets/svg/logo.svg" alt="logo">
   </NuxtLink>
   <h1 class=" text-2xl/loose font-bold mb-4">登入/註冊</h1>
   <div>
