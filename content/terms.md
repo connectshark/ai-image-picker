@@ -1,5 +1,5 @@
 ---
-title: Terms
+title: Terms | AiPicker
 page: 使用者條款
 ---
 # {{ page }}

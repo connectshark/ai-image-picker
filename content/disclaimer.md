@@ -1,5 +1,5 @@
 ---
-title: Disclaimer
+title: Disclaimer | AiPicker
 page: 免責聲明
 ---
 # {{ page }}

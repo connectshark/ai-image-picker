@@ -3,8 +3,7 @@ export default defineNuxtConfig({
   nitro: {
   },
   content: {
-    defaultLocale: 'zh-TW',
-    documentDriven: true
+    defaultLocale: 'zh-TW'
   },
   modules: [
     '@nuxt/content',

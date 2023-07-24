@@ -20,12 +20,3 @@
   </article>
 </NuxtLayout>
 </template>
-
-<script setup>
-const { page } = useContent()
-const app = useAppConfig()
-useHead({
-  title: page.value.title,
-  titleTemplate: t => `${t} | ${app.site.name}`
-})
-</script>

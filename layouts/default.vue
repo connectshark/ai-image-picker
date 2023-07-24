@@ -45,6 +45,10 @@ if (route.meta.title) {
   useHead({
     titleTemplate: () => `${route.meta.title} | ${app.site.name}`
   })
+} else if (route.meta.title === '') {
+  useHead({
+    title: app.site.name
+  })
 }
 
 </script>
