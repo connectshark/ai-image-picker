@@ -14,4 +14,7 @@ watch(user, value => {
     router.replace('/ai')
   }
 })
+definePageMeta({
+  title: 'Loading'
+})
 </script>

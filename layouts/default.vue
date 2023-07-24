@@ -18,20 +18,17 @@
     <slot></slot>
   </main>
   <footer class=" py-10 bg-secondary-button/40">
-    <div class="w-5/6 mx-auto grid gap-10">
+    <div class="w-5/6 mx-auto grid gap-10 lg:grid-cols-3">
       <div>
         <p>
-          <NuxtLink to="/">2023<i class='bx bx-copyright'></i>{{ config.site.name }}</NuxtLink>
+          <NuxtLink to="/"><i class='bx bx-copyright'></i>2023{{ app.site.name }}</NuxtLink>
         </p>
       </div>
       <div class=" space-x-4">
         <NuxtLink class=" hover:underline" to="/terms">使用者條款</NuxtLink>
         <NuxtLink class=" hover:underline" to="/disclaimer">免責聲明</NuxtLink>
       </div>
-      <div class=" space-x-4">
-        <a href="https://www.instagram.com/nose_gates/">
-          <i class='bx bxl-instagram bx-sm'></i>
-        </a>
+      <div class=" space-x-4 lg:text-right">
         <a href="https://github.com/connectshark/ai-image-picker" target="_blank">
           <i class='bx bxl-github bx-sm'></i>
         </a>
@@ -42,5 +39,12 @@
 
 <script setup>
 const user = useUser()
-const config = useAppConfig()
+const app = useAppConfig()
+const route = useRoute()
+if (route.meta.title) {
+  useHead({
+    titleTemplate: () => `${route.meta.title} | ${app.site.name}`
+  })
+}
+
 </script>

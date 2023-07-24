@@ -249,4 +249,7 @@ const submitHandler = async () => {
   })
   loading.value = false
 }
+definePageMeta({
+  title: 'AI'
+})
 </script>

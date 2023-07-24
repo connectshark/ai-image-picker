@@ -15,4 +15,7 @@
 
 <script setup>
 
+definePageMeta({
+  title: ''
+})
 </script>

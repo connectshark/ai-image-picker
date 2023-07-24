@@ -1,3 +1,4 @@
+/** @type {import('nuxt.config')} */
 export default defineNuxtConfig({
   nitro: {
     prerender: {
@@ -5,7 +6,8 @@ export default defineNuxtConfig({
     }
   },
   content: {
-    defaultLocale: 'zh-TW'
+    defaultLocale: 'zh-TW',
+    documentDriven: true
   },
   modules: [
     '@nuxt/content',

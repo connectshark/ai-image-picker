@@ -3,3 +3,11 @@
   <slot/>
 </div>
 </template>
+
+<script setup>
+const app = useAppConfig()
+const route = useRoute()
+useHead({
+  titleTemplate: () => `${route.meta.title} | ${app.site.name}`
+})
+</script>
