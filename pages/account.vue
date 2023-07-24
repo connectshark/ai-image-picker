@@ -25,7 +25,8 @@
 
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['auth'],
+  title: 'Account'
 })
 const {
   profile,
@@ -38,7 +39,4 @@ const logout = async () => {
   await client.auth.signOut()
   router.push('/')
 }
-definePageMeta({
-  title: 'Account'
-})
 </script>

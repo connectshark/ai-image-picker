@@ -68,7 +68,8 @@
 
 <script setup>
 definePageMeta({
-  middleware: ['auth']
+  middleware: ['auth'],
+  title: 'AI'
 })
 const collapse = ref(false)
 const needDemo = ref(false)
@@ -249,7 +250,4 @@ const submitHandler = async () => {
   })
   loading.value = false
 }
-definePageMeta({
-  title: 'AI'
-})
 </script>
