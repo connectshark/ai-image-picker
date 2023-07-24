@@ -1,9 +1,6 @@
 /** @type {import('nuxt.config')} */
 export default defineNuxtConfig({
   nitro: {
-    prerender: {
-      routes: ['/', '/terms', '/disclaimer']
-    }
   },
   content: {
     defaultLocale: 'zh-TW',
