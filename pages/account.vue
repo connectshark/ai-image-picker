@@ -32,11 +32,13 @@ const {
   profile,
   loading
 } = useProfile()
-const client = useSupabaseAuthClient()
+const supabase = useSupabaseAuthClient()
+const user = useUser()
 const router = useRouter()
 
 const logout = async () => {
-  await client.auth.signOut()
+  await supabase.auth.signOut()
+  user.value.id = ''
   router.push('/')
 }
 </script>

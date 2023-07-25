@@ -1,6 +1,6 @@
 export default function () {
   const client = useSupabaseClient()
-  const user = useSupabaseUser()
+  const user = useUser()
   const loading = ref(false)
   const profile = ref({})
 
@@ -14,7 +14,7 @@ export default function () {
     loading.value = false
   }
 
-  getProfile()
+  onMounted(getProfile)
 
   return {
     loading,

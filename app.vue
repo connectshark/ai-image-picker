@@ -5,11 +5,18 @@
 </template>
 
 <script setup>
-const client = useSupabaseClient()
+const supabase = useSupabaseClient()
+const route = useRoute()
+const router = useRouter()
 onMounted(() => {
-  client.auth.onAuthStateChange((_, session) => {
-    const user = useUser()
-    user.value.id = session !== null ? session.user.id : ''
+  supabase.auth.onAuthStateChange((_, session) => {
+    if (session && session.user) {
+      const user = useUser()
+      user.value.id = session.user.id
+      if (route.path === '/callback') {
+        router.replace('/ai')
+      }
+    }
   })
 })
 </script>

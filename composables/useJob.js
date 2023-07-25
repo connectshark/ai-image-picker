@@ -2,7 +2,7 @@ export default function () {
   const list = ref([])
   const loading = ref(false)
   const client = useSupabaseClient()
-  const user = useSupabaseUser()
+  const user = useUser()
   
   const getAllJobs = async () => {
     let { data: job, error } = await client.from('job')
@@ -34,7 +34,7 @@ export default function () {
     await getAllJobs()
   }
 
-  getAllJobs()
+  onMounted(getAllJobs)
 
   return {
     list,
